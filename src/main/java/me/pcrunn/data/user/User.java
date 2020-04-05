@@ -3,7 +3,6 @@ package me.pcrunn.data.user;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import me.pcrunn.data.DataPlugin;
 import me.pcrunn.data.rank.Rank;
 import me.pcrunn.data.user.statistics.UserStatistics;
 
@@ -37,6 +36,7 @@ public class User {
 
     @Getter
     @Setter
+    @JsonIgnore
     private long joined;
 
     /**

@@ -75,7 +75,7 @@ public class UserFactory {
                 .elo(0)
                 .build();
 
-        /* initialize u ser */
+        /* initialize user */
         user.setStatistics(statistics);
         user.setPlaytime(0);
         user.setRank(DataPlugin.getDataPlugin().getRankService().getDefaultRank());

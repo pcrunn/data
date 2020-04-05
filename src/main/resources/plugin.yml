@@ -1,0 +1,5 @@
+name: cDatabaseClient
+version: 1.0
+author: pcrunn
+main: me.pcrunn.data.DataPlugin
+description: 'Provides a nicer developer api to access the database'

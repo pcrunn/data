@@ -1,14 +1,10 @@
 package me.pcrunn.data.user;
 
-import com.rethinkdb.gen.ast.Table;
-import com.rethinkdb.gen.ast.Upcase;
 import com.rethinkdb.net.Result;
 import lombok.Getter;
 import me.pcrunn.data.DataPlugin;
-import org.bukkit.Bukkit;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static com.rethinkdb.RethinkDB.r;
 
@@ -41,8 +37,6 @@ public class UserService {
      */
     public User find(UUID uuid) {
         User found;
-
-        Bukkit.broadcastMessage(this.debugUsers().toString());
 
         /* try to find in cache */
         found = this.users
@@ -102,10 +96,6 @@ public class UserService {
                     .insert(user)
                     .run(this.plugin.getConnection());
         }
-    }
-
-    public List<String> debugUsers() {
-        return this.users.stream().map(user -> user.getName()).collect(Collectors.toList());
     }
 
 }

@@ -1,6 +1,7 @@
 package me.pcrunn.data.user;
 
 import com.rethinkdb.gen.ast.Table;
+import com.rethinkdb.gen.ast.Upcase;
 import com.rethinkdb.net.Result;
 import lombok.Getter;
 import me.pcrunn.data.DataPlugin;
@@ -84,30 +85,23 @@ public class UserService {
      * @param user the user object
      */
     public void save(User user) {
-        /* check if the user is already in the database */
-//        boolean found = r
-//                .table("users")
-//                .filter(document -> document.g("uuid").eq(user.getUuid().toString()))
-//                .run(this.plugin.getConnection())
-//                .hasNext();
+        Map<String, Object> data = (Map<String, Object>) r
+                .table("users")
+                .filter(document -> document.g("uuid").eq(user.getUuid().toString()).or(document.g("name").eq(user.getName())))
+                .update(user)
+                .run(this.plugin.getConnection())
+                .next();
 
-        /* get the users table so we don't repeat any code */
-        Table table = r
-                .table("users");
+        /* if nothing was updated */
+        boolean replaced = (((long) data.get("replaced")) != 0);
 
-//        if (found) {
-            /* if the user is already in the database, update the document */
-            table
-                    .update(user)
+        if(!replaced) {
+            /* insert it it */
+            r
+                    .table("users")
+                    .insert(user)
                     .run(this.plugin.getConnection());
-//        } else {
-//            /* if the user is not in the database, insert the document */
-//            table
-//                    .insert(user)
-//                    .run(this.plugin.getConnection());
-//        }
-
-
+        }
     }
 
     public List<String> debugUsers() {

@@ -4,11 +4,10 @@ import com.rethinkdb.gen.ast.Table;
 import com.rethinkdb.net.Result;
 import lombok.Getter;
 import me.pcrunn.data.DataPlugin;
+import org.bukkit.Bukkit;
 
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.rethinkdb.RethinkDB.r;
 
@@ -41,6 +40,8 @@ public class UserService {
      */
     public User find(UUID uuid) {
         User found;
+
+        Bukkit.broadcastMessage(this.debugUsers().toString());
 
         /* try to find in cache */
         found = this.users
@@ -107,6 +108,10 @@ public class UserService {
         }
 
 
+    }
+
+    public List<String> debugUsers() {
+        return this.users.stream().map(user -> user.getName()).collect(Collectors.toList());
     }
 
 }

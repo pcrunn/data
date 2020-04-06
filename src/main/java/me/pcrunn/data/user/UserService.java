@@ -85,27 +85,27 @@ public class UserService {
      */
     public void save(User user) {
         /* check if the user is already in the database */
-        boolean found = r
-                .table("users")
-                .filter(document -> document.g("uuid").eq(user.getUuid().toString()))
-                .run(this.plugin.getConnection())
-                .hasNext();
+//        boolean found = r
+//                .table("users")
+//                .filter(document -> document.g("uuid").eq(user.getUuid().toString()))
+//                .run(this.plugin.getConnection())
+//                .hasNext();
 
         /* get the users table so we don't repeat any code */
         Table table = r
                 .table("users");
 
-        if (found) {
+//        if (found) {
             /* if the user is already in the database, update the document */
             table
                     .update(user)
                     .run(this.plugin.getConnection());
-        } else {
-            /* if the user is not in the database, insert the document */
-            table
-                    .insert(user)
-                    .run(this.plugin.getConnection());
-        }
+//        } else {
+//            /* if the user is not in the database, insert the document */
+//            table
+//                    .insert(user)
+//                    .run(this.plugin.getConnection());
+//        }
 
 
     }

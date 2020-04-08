@@ -3,7 +3,10 @@ version: 2.1
 orbs:
   maven: circleci/maven@0.0.12
 
-workflows:
-  maven_install:
-    jobs:
-      - maven/install
+jobs:
+  build:
+    docker:
+      - image: circleci/maven@1.0.0
+    steps:
+      - checkout
+      - run: mvn clean install

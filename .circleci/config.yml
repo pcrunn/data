@@ -8,9 +8,6 @@ jobs:
     docker:
       - image: 'maven:3.6.3-jdk-8'
   
-    # set the working directory to /tmp 
-    working_directory: /tmp    
-    
     steps:
 
       # get the code
@@ -21,4 +18,4 @@ jobs:
 
       # store the artifacts
       - store_artifacts:
-          path: /tmp/target/*.jar
+          path: ./target/*.jar

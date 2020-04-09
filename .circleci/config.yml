@@ -18,4 +18,4 @@ jobs:
 
       # store the artifacts
       - store_artifacts:
-          path: ./target/*.jar
+          path: ./data/target/*.jar

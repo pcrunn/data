@@ -18,4 +18,4 @@ jobs:
 
       # store the artifacts
       - store_artifacts:
-          path: ./data/target/*.jar
+          path: /root/project/target/data-1.0-SNAPSHOT.jar
